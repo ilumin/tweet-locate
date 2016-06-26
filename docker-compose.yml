@@ -3,26 +3,29 @@ version: "2"
 services:
 
   cvolume:
-    container_name: cvolume
+    container_name: twl-cvolume
     image: busybox
     volumes:
       - .:/app
 
   webserver-service:
+    container_name: twl-webserver-service
     image: bitnami/nginx
     ports:
       - 80:80
     volumes:
       - ./containers-config/site.conf:/bitnami/nginx/conf/vhosts/site.conf
     volumes_from:
-      - cvolume
+      - twl-cvolume
 
   php-service:
+    container_name: twl-php-service
     image: bitnami/php-fpm
     volumes_from:
-      - cvolume
+      - twl-cvolume
 
   db-service:
+    container_name: twl-db-service
     image: bitnami/mariadb
     ports:
       - 3306:3306
