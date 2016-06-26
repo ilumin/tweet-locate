@@ -19,9 +19,10 @@ class SearchAction
 
     public function search(Request $request, Response $response, $args = [])
     {
-        $requestParam = $request->getParam('geocode');
+        $requestParams['geocode'] = $request->getParam('geocode');
+        $requestParams['count'] = $request->getParam('count', 100);
 
-        $result['request-param'] = $requestParam;
+        $result['request-param'] = $requestParams;
 
         return $response->withJson($result);
     }
