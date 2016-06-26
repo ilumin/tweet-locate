@@ -1,7 +1,6 @@
 {
     "require": {
         "slim/slim": "^3.4",
-        "guzzle/guzzle": "^3.9",
         "endroid/twitter": "^1.2"
     },
     "autoload": {
