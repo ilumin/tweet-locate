@@ -14,10 +14,15 @@
         setCenter: function(lat, lng) {
             this.map.setCenter(lat, lng);
         },
-        addMarker: function(lat, lng, markerOption) {
+        addMarker: function(lat, lng, avatar, tweetText) {
+            console.log('add market at (', lat, ',', lng, ')');
             this.map.addMarker({
                 lat: lat,
-                lng: lng
+                lng: lng,
+                icon: avatar,
+                infoWindow: {
+                    content: tweetText
+                }
             });
         },
         findTweet: function(lat, lng) {
@@ -32,11 +37,18 @@
                 }
 
                 for (var n = response['data'].length, i = 0; i < n; i++) {
-                    if (!response['data'][i].geo) {
+                    var tweet = response['data'][i];
+                    if (!tweet.geo) {
                         console.log('response[\'data\']['+i+'].geo', response['data'][i].geo);
                         continue;
                     }
                     console.log(response['data'][i]);
+                    app.addMarker(
+                        tweet.geo.coordinates[0],
+                        tweet.geo.coordinates[1],
+                        tweet.user.profile_image_url,
+                        tweet.text
+                    )
                 }
             });
         }
