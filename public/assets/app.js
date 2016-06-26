@@ -1,6 +1,8 @@
 (function() {
 
     var app = {
+        radius: $('#config-radius').val(),
+        count: $('#config-count').val(),
         map: null,
         init: function() {
             this.map = new GMaps({
@@ -16,6 +18,26 @@
             this.map.addMarker({
                 lat: lat,
                 lng: lng
+            });
+        },
+        findTweet: function(lat, lng) {
+            this.setCenter(lat, lng);
+            $.getJSON('/search', {
+                geocode: [lat, lng, this.radius].join(','),
+                count: this.count
+            }, function(response) {
+                if (response.status != 'success') {
+                    console.error('Fail');
+                    return;
+                }
+
+                for (var n = response['data'].length, i = 0; i < n; i++) {
+                    if (!response['data'][i].geo) {
+                        console.log('response[\'data\']['+i+'].geo', response['data'][i].geo);
+                        continue;
+                    }
+                    console.log(response['data'][i]);
+                }
             });
         }
     };
@@ -33,7 +55,7 @@
                 }
 
                 var latlng = results[0].geometry.location;
-                app.setCenter(latlng.lat(), latlng.lng());
+                app.findTweet(latlng.lat(), latlng.lng());
             }
         });
     });

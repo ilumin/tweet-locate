@@ -51,6 +51,8 @@
     <div class="free-style-nav">
         <form action="/search" method="get" class="control has-addons" id="find-tweet">
             <input class="input is-expanded" type="text" placeholder="City Name" id="city">
+            <input type="hidden" id="config-radius" value="{{ gmap.radius }}">
+            <input type="hidden" id="config-count" value="{{ gmap.count }}">
             <button type="submit" class="button is-info">Search</button>
         </form>
     </div>

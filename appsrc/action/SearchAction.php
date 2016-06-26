@@ -20,7 +20,7 @@ class SearchAction
     public function search(Request $request, Response $response, $args = [])
     {
         $requestParams['geocode'] = $request->getParam('geocode');
-        $requestParams['count'] = $request->getParam('count', 10);
+        $requestParams['count'] = $request->getParam('count', 100);
 
         $searchResult = $this->twitterResource->search($requestParams);
         if (empty($searchResult)) {

@@ -32,7 +32,9 @@ $container['TwitterResource'] = function(Container $c) {
     $twitterConfig = $c->get('twitter');
     $twitterClient = new Twitter(
         $twitterConfig['consumerKey'],
-        $twitterConfig['consumerSecret']
+        $twitterConfig['consumerSecret'],
+        $twitterConfig['accessKey'],
+        $twitterConfig['accessToken']
     );
     return new TwitterResource($twitterClient);
 };
