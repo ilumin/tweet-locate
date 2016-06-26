@@ -23,7 +23,9 @@ $container['view'] = function (Container $c) {
 };
 
 $container['PageAction'] = function(Container $c) {
-    return new PageAction($c->get('view'));
+    return new PageAction($c->get('view'), [
+        'gmap' => $c->get('gmap'),
+    ]);
 };
 
 $container['TwitterResource'] = function(Container $c) {
