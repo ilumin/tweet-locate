@@ -1,31 +1,35 @@
 <?php
 namespace App\Action;
 
-use Endroid\Twitter\Twitter;
+use App\Resource\TwitterResource;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 class SearchAction
 {
     /**
-     * @var Twitter
+     * @var TwitterResource
      */
-    public $twitterClient;
+    public $twitterResource;
 
-    public function __construct($twitterClient)
+    public function __construct($twitterResource)
     {
-        $this->twitterClient = $twitterClient;
+        $this->twitterResource = $twitterResource;
     }
 
     public function search(Request $request, Response $response, $args = [])
     {
         $requestParams['geocode'] = $request->getParam('geocode');
-        $requestParams['count'] = $request->getParam('count', 100);
+        $requestParams['count'] = $request->getParam('count', 10);
 
-        $twitterResponse = $this->twitterClient->query('search/tweets', 'GET', 'json', $requestParams);
-
-        $result['request-param'] = $requestParams;
-        $result['response'] = json_decode($twitterResponse->getContent());
+        $searchResult = $this->twitterResource->search($requestParams);
+        if (empty($searchResult)) {
+            $result['error'] = 'Not found.';
+        }
+        else {
+            $result['status'] = 'success';
+            $result['data'] = $searchResult;
+        }
 
         return $response->withJson($result);
     }
