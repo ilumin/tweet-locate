@@ -12,12 +12,13 @@
     <style>
         /** reset page height */
         html, body {
+            position: relative;
             height: 100%;
         }
         /** our simple customize styles */
         .map-container {
-            position: relative;
-            height: 100%;
+            position: absolute;
+            top: 0; right: 0; bottom: 32px; left: 0;
             background: #F1F3F5;
         }
         .map-container .icon {
@@ -48,14 +49,14 @@
     </div>
 
     <div class="free-style-nav">
-        <form action="/search" method="get" class="control has-addons">
-            <input class="input is-expanded" type="text" placeholder="City Name">
+        <form action="/search" method="get" class="control has-addons" id="find-tweet">
+            <input class="input is-expanded" type="text" placeholder="City Name" id="city">
             <button type="submit" class="button is-info">Search</button>
         </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ gmap.key }}" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ gmap.key }}"></script>
     <script src="https://rawgit.com/HPNeo/gmaps/master/gmaps.js"></script>
     <script src="/assets/app.js"></script>
 
