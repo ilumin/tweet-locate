@@ -5,4 +5,5 @@ return [
     'settings' => [
         'displayErrorDetails' => true,
     ],
+    'twitter' => require CONFIG . '/twitter-auth.php',
 ];
