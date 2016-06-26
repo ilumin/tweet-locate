@@ -1,6 +1,7 @@
 {
     "require": {
-        "slim/slim": "^3.4"
+        "slim/slim": "^3.4",
+        "guzzle/guzzle": "^3.9"
     },
     "autoload": {
         "psr-4": {
