@@ -1,20 +1,20 @@
 <?php
 namespace App\Action;
 
-use Guzzle\Http\Client;
+use Endroid\Twitter\Twitter;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 class SearchAction
 {
     /**
-     * @var Client
+     * @var Twitter
      */
-    public $apiClient;
+    public $twitterClient;
 
-    public function __construct($apiClient)
+    public function __construct($twitterClient)
     {
-        $this->apiClient = $apiClient;
+        $this->twitterClient = $twitterClient;
     }
 
     public function search(Request $request, Response $response, $args = [])
@@ -22,7 +22,10 @@ class SearchAction
         $requestParams['geocode'] = $request->getParam('geocode');
         $requestParams['count'] = $request->getParam('count', 100);
 
+        $twitterResponse = $this->twitterClient->query('search/tweets', 'GET', 'json', $requestParams);
+
         $result['request-param'] = $requestParams;
+        $result['response'] = json_decode($twitterResponse->getContent());
 
         return $response->withJson($result);
     }
