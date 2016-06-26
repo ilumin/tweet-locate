@@ -2,13 +2,13 @@ version: "2"
 
 services:
 
-  cvolume:
+  twl-cvolume:
     container_name: twl-cvolume
     image: busybox
     volumes:
       - .:/app
 
-  webserver-service:
+  twl-webserver-service:
     container_name: twl-webserver-service
     image: bitnami/nginx
     ports:
@@ -18,13 +18,13 @@ services:
     volumes_from:
       - twl-cvolume
 
-  php-service:
+  twl-php-service:
     container_name: twl-php-service
     image: bitnami/php-fpm
     volumes_from:
       - twl-cvolume
 
-  db-service:
+  twl-db-service:
     container_name: twl-db-service
     image: bitnami/mariadb
     ports:
@@ -35,7 +35,7 @@ services:
       - MARIADB_PASSWORD=app
       - MARIADB_ROOT_PASSWORD=app
     volumes:
-      - db-volume
+      - db-volume:/bitnami/mariadb
 
 volumes:
   db-volume:
