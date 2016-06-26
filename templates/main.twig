@@ -1,1 +1,58 @@
-Hello
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yike! Yike!">
+    <title>Yike! Yike!</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.28/css/bulma.min.css">
+    <style>
+        /** reset page height */
+        html, body {
+            height: 100%;
+        }
+        /** our simple customize styles */
+        .map-container {
+            position: relative;
+            height: 100%;
+            background: #F1F3F5;
+        }
+        .map-container .icon {
+            position: absolute;
+            top: 50%; left: 50%;
+            margin-top: -22px;
+            margin-left: -12px;
+        }
+        .free-style-nav {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 32px;
+        }
+        .free-style-nav .input,
+        .free-style-nav .button {
+            -webkit-border-radius: 0!important;
+            -moz-border-radius: 0!important;
+            border-radius: 0!important;
+        }
+    </style>
+</head>
+<body class="app-container">
+
+    <div id="map" class="map-container">
+        <span class="icon">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        </span>
+    </div>
+
+    <div class="free-style-nav">
+        <form action="/search" method="get" class="control has-addons">
+            <input class="input is-expanded" type="text" placeholder="City Name">
+            <button type="submit" class="button is-info">Search</button>
+        </form>
+    </div>
+
+</body>
+</html>
