@@ -18,3 +18,21 @@
   Params:  
     - geocode: latitude,longitude,radius
     - count: number of tweets to return per page  
+
+## Require
+
+- Docker [https://www.docker.com/]
+
+## Run
+
+```
+  # start docker container 
+  # it will use port 80 and 3306 (should be available)
+  $ docker-compose up -d 
+  
+  # install php package
+  $ docker exec -it twl-php-service composer install 
+  
+  # open
+  $ open http://localhost/
+```
